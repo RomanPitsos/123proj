@@ -2,7 +2,7 @@
 board=["-", "-" , "-",
        "-", "-", "-",
        "-", "-", "-"]
-
+import random
 winner= None
 
 current_player="X"
@@ -17,28 +17,35 @@ def gameBoard(board):
 
 
 def player_input(board):
-    while True:
+   
+    if current_player == "X":
+        
+        while True:
 
-        input_p=int(input("Enter your choise number 1-9:"))
-        if input_p>=1 and input_p<=9 and board[input_p-1]=="-":
-            board[input_p-1]=current_player
+            input_p=int(input("Enter your choise number 1-9:"))
+
+            if input_p>=1 and input_p<=9 and board[input_p-1]=="-":
+                    board[input_p-1]=current_player
             break
-            
-    
-        else:   print("Please choose from 1-9:")
+        else:      
+                print("Please choose from 1-9:")  
+    else :  
+        computer_move =[i for i , move in enumerate(board) if move =="-"]
+        computer_choise = random.choice(computer_move)
+        board[computer_choise]=current_player
         
 
 # check win/tie
 
 def checkRow(board):
-    global winner
+    
     if (board[0]==board[1]==board[2] and board[0]!="-") or (board[3]==board[4]==board[5] 
         and board[3]!="-") or (board[6]==board[7]==board[8] and board[6]!="-"):
         
         return True   
     
 def checkLine(board):
-    global winner
+    
     if (board[0]==board[3]==board[6] and board[0]!="-") or (board[1]==board[4]==board[7] 
         and board[1]!="-") or (board[2]==board[5]==board[8] and board[2]!="-"):
         
